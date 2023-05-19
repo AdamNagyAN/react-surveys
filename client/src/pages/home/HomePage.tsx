@@ -1,6 +1,6 @@
 import AppBar from '../../components/organisms/appbar/AppBar';
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   return (
     <>
       <AppBar />

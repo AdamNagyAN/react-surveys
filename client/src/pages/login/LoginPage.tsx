@@ -1,10 +1,27 @@
 import AppBar from '../../components/organisms/appbar/AppBar';
-import { Button, Card, Form, Input } from 'react-daisyui';
-import { useForm } from 'react-hook-form';
+import { Button, Card, Form } from 'react-daisyui';
+import { Controller, useForm } from 'react-hook-form';
+import { loginSchema, type LoginValues } from './LoginForm.schema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import TextField from '../../components/molecules/TextField';
+import React from 'react';
+import axiosBase from '../../service/axiosBase';
 
 const LoginPage = () => {
-  const { handleSubmit } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginValues>({
+    resolver: yupResolver(loginSchema()),
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
+  });
   const onSubmit = () => {};
+
+  React.useEffect(() => {
+    axiosBase.get('/asd');
+  }, []);
 
   return (
     <>
@@ -14,12 +31,24 @@ const LoginPage = () => {
           <h1 className="text-center font-medium text-lg">Login</h1>
           <form className="form-control" onSubmit={handleSubmit(onSubmit)}>
             <Form.Label title="Email" />
-            <Input type="text" placeholder="email" className="input-bordered" />
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => {
+                return (
+                  <TextField {...field} errorText={errors.email?.message} />
+                );
+              }}
+            />
             <Form.Label className="mt-2" title="Password" />
-            <Input
-              type="text"
-              placeholder="password"
-              className="input-bordered"
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => {
+                return (
+                  <TextField {...field} errorText={errors.password?.message} />
+                );
+              }}
             />
             <Button className="mt-8">Login</Button>
           </form>
