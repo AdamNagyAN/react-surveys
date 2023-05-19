@@ -4,12 +4,14 @@ import { Controller, useForm } from 'react-hook-form';
 import { loginSchema, type LoginValues } from './LoginForm.schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import TextField from '../../components/molecules/TextField';
-import React from 'react';
 import useLogin from '../../query/auth/useLogin';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../Routes';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/auth/authSlice';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -22,7 +24,8 @@ const LoginPage = () => {
   const { mutateAsync, isLoading } = useLogin();
   const navigate = useNavigate();
   const onSubmit = async (formValues: LoginValues) => {
-    await mutateAsync(formValues);
+    const resp = await mutateAsync(formValues);
+    dispatch(setUser(resp.data));
     navigate(ROUTES.HOME);
   };
 
@@ -39,7 +42,11 @@ const LoginPage = () => {
               control={control}
               render={({ field }) => {
                 return (
-                  <TextField {...field} errorText={errors.email?.message} />
+                  <TextField
+                    {...field}
+                    value={field.value ?? ''}
+                    errorText={errors.email?.message}
+                  />
                 );
               }}
             />
@@ -49,7 +56,11 @@ const LoginPage = () => {
               control={control}
               render={({ field }) => {
                 return (
-                  <TextField {...field} errorText={errors.password?.message} />
+                  <TextField
+                    {...field}
+                    value={field.value ?? ''}
+                    errorText={errors.password?.message}
+                  />
                 );
               }}
             />
