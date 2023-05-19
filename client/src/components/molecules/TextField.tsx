@@ -12,7 +12,6 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
         <Input
           ref={ref}
           type="text"
-          placeholder="email"
           className={cn({ 'input-bordered': true, 'input-error': errorText })}
           {...otherProps}
         />

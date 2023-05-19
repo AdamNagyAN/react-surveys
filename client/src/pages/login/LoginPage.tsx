@@ -60,6 +60,7 @@ const LoginPage = () => {
                     {...field}
                     value={field.value ?? ''}
                     errorText={errors.password?.message}
+                    type="password"
                   />
                 );
               }}
