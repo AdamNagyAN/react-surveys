@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import LoginResponseDto from '../../service/auth/dto/LoginResponseDto';
 
-interface AuthState {
+export interface AuthState {
   user: LoginResponseDto | undefined;
 }
 

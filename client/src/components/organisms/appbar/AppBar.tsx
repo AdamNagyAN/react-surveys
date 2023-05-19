@@ -1,14 +1,20 @@
-import { Navbar } from 'react-daisyui';
+import { Button, Card, Dropdown, Navbar } from 'react-daisyui';
 import { Link } from 'react-router-dom';
 import { logout } from '../../../redux/auth/authSlice';
 import { ROUTES } from '../../../Routes';
 import { useDispatch, useSelector } from 'react-redux';
+import store from '../../../redux/store';
+import { UserIcon } from '@heroicons/react/24/outline';
 
 type MenuOption =
   | { label: string; path: string }
   | { label: string; onClick: () => void };
 
-const menuOptionsLogged = (dispatch: any): MenuOption[] => [
+const menuOptionsLogged: MenuOption[] = [
+  {
+    label: 'Create survey',
+    path: ROUTES.CREATE_SURVEY,
+  },
   {
     label: 'My surveys',
     path: ROUTES.MY_SURVEYS,
@@ -16,16 +22,6 @@ const menuOptionsLogged = (dispatch: any): MenuOption[] => [
   {
     label: 'Answers',
     path: ROUTES.ANSWERS,
-  },
-  {
-    label: 'Profile',
-    path: ROUTES.PROFILE,
-  },
-  {
-    label: 'Logout',
-    onClick: () => {
-      dispatch(logout());
-    },
   },
 ];
 
@@ -47,9 +43,15 @@ const isButton = (
 };
 
 const AppBar = () => {
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector(
+    (state: ReturnType<typeof store.getState>) => state.auth
+  );
   const dispatch = useDispatch();
-  const currentMenu = user ? menuOptionsLogged(dispatch) : menuOptionsNotLogged;
+  const currentMenu = user ? menuOptionsLogged : menuOptionsNotLogged;
+
+  const onLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <div className="flex w-full component-preview p-4 items-center justify-center gap-2 font-sans">
@@ -58,7 +60,7 @@ const AppBar = () => {
           <span className="text-lg font-medium">Surveys</span>
         </Link>
         <nav>
-          <ul className="flex gap-8">
+          <ul className="flex gap-8 items-center">
             {currentMenu.map((option: MenuOption) => {
               const isLink = !isButton(option);
               return isLink ? (
@@ -75,6 +77,33 @@ const AppBar = () => {
                 </li>
               );
             })}
+            {user && (
+              <li>
+                <Dropdown vertical="bottom" end>
+                  <Dropdown.Toggle color="ghost">Profile</Dropdown.Toggle>
+                  <Dropdown.Menu className="card card-compact w-64 p-2 shadow bg-base-300 text-primary-content m-1">
+                    <Card.Body className="normal-case">
+                      <Card.Title tag="div" className="mb-0">
+                        <div className="p-2 bg-neutral-content rounded-full">
+                          <UserIcon className="w-6 h-6 text-black" />
+                        </div>
+                        <div>
+                          <p className="text-medium">{user.user.fullname}</p>
+                          <p className="text-sm font-normal">
+                            {user.user.email}
+                          </p>
+                        </div>
+                      </Card.Title>
+                      {/* TODO: amount of surveys */}
+                      <p>Amount of surveys: {0}</p>
+                      <Button className="mt-4" color="error" onClick={onLogout}>
+                        Log out
+                      </Button>
+                    </Card.Body>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </li>
+            )}
           </ul>
         </nav>
       </Navbar>
