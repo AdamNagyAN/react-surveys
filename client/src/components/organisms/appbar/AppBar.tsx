@@ -7,7 +7,7 @@ const AppBar = () => {
     <div className="flex w-full component-preview p-4 items-center justify-center gap-2 font-sans">
       <Navbar className="bg-base-300 shadow-xl rounded-box px-10 uppercase flex justify-between">
         <Link to={ROUTES.HOME}>
-          <span className="text-lg font-medium">Survays</span>
+          <span className="text-lg font-medium">Surveys</span>
         </Link>
         <nav>
           <ul className="flex gap-8">

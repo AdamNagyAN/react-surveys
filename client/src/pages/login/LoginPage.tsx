@@ -5,7 +5,9 @@ import { loginSchema, type LoginValues } from './LoginForm.schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import TextField from '../../components/molecules/TextField';
 import React from 'react';
-import axiosBase from '../../service/axiosBase';
+import useLogin from '../../query/auth/useLogin';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../Routes';
 
 const LoginPage = () => {
   const {
@@ -17,11 +19,12 @@ const LoginPage = () => {
     mode: 'onBlur',
     reValidateMode: 'onChange',
   });
-  const onSubmit = () => {};
-
-  React.useEffect(() => {
-    axiosBase.get('/asd');
-  }, []);
+  const { mutateAsync, isLoading } = useLogin();
+  const navigate = useNavigate();
+  const onSubmit = async (formValues: LoginValues) => {
+    await mutateAsync(formValues);
+    navigate(ROUTES.HOME);
+  };
 
   return (
     <>
@@ -50,7 +53,9 @@ const LoginPage = () => {
                 );
               }}
             />
-            <Button className="mt-8">Login</Button>
+            <Button loading={isLoading} className="mt-8">
+              Login
+            </Button>
           </form>
         </Card.Body>
       </Card>

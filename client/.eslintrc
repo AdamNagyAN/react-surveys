@@ -27,6 +27,9 @@
     "react/jsx-curly-brace-presence": [2, { "props": "never", "children": "ignore", "propElementValues": "ignore" }],
     "@typescript-eslint/no-misused-promises": 0,
     "@typescript-eslint/strict-boolean-expressions": 0,
-    "@typescript-eslint/no-floating-promises": 0
+    "@typescript-eslint/no-floating-promises": 0,
+    "@typescript-eslint/consistent-type-imports": 0,
+    "@typescript-eslint/return-await": 0,
+    "@typescript-eslint/promise-function-async": 0
   }
 }
