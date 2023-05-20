@@ -4,6 +4,7 @@ import HomePage from './pages/home/HomePage';
 import RegisterPage from './pages/register/RegisterPage';
 import LoginPage from './pages/login/LoginPage';
 import ProtectedRoute from './components/molecules/ProtectedRoute';
+import MySurveysPage from './pages/my-surveys/MySurveysPage';
 
 const AppRoutes = () => {
   return (
@@ -15,7 +16,7 @@ const AppRoutes = () => {
         path={ROUTES.MY_SURVEYS}
         element={
           <ProtectedRoute>
-            <div>My surveys</div>
+            <MySurveysPage />
           </ProtectedRoute>
         }
       />
@@ -24,14 +25,6 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <div>Answers</div>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PROFILE}
-        element={
-          <ProtectedRoute>
-            <div>Profile</div>
           </ProtectedRoute>
         }
       />

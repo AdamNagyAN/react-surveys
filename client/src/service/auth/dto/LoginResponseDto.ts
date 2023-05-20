@@ -1,7 +1,7 @@
 interface LoginResponseDto {
   accessToken: string;
   authentication: Authentication;
-  user: User;
+  user: UserDto;
 }
 
 export interface Authentication {
@@ -17,7 +17,7 @@ export interface Payload {
   jti: string;
 }
 
-export interface User {
+export interface UserDto {
   id: number;
   email: string;
   fullname: string;
