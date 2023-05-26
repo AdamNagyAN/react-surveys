@@ -4,15 +4,13 @@ import GetSurveysResponseDto from './dto/GetSurveysResponseDto';
 import SurveyDto from './dto/SurveyDto';
 import CreateSurveyDto from '../auth/dto/CreateSurveyDto';
 
-const getAll = (): AxiosPromise<GetSurveysResponseDto> => {
-  return axiosBase.get('/surveys');
-};
-
 const getAllWithLimits = (
   skip: number,
   limit: number
 ): AxiosPromise<GetSurveysResponseDto> => {
-  return axiosBase.get(`/surveys?$skip=${skip}&$limit=${limit}`);
+  return axiosBase.get(`/surveys`, {
+    params: { $skip: skip, $limit: limit },
+  });
 };
 
 const getByHash = (hash: string): AxiosPromise<GetSurveysResponseDto> => {
@@ -39,7 +37,6 @@ const deleteOne = (id: number): AxiosPromise<void> => {
 };
 
 const surveysClient = {
-  getAll,
   getAllWithLimits,
   getByHash,
   getOne,

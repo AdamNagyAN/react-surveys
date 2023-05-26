@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import LoginResponseDto from '../../service/auth/dto/LoginResponseDto';
+import userLocalStorage from '../../utils/userLocalStorage';
 
 export interface AuthState {
   user: LoginResponseDto | undefined;
@@ -14,9 +15,11 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<LoginResponseDto>) => {
+      userLocalStorage.setUser(action.payload);
       state.user = action.payload;
     },
     logout: (state) => {
+      userLocalStorage.removeUser();
       state.user = undefined;
     },
   },
