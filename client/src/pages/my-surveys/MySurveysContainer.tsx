@@ -1,5 +1,6 @@
 import { Table } from 'react-daisyui';
 import GetSurveysResponseDto from '../../service/surveys/dto/GetSurveysResponseDto';
+import SurveyActions from './SurveyActions';
 
 interface MySurveysContainerProps {
   data: GetSurveysResponseDto;
@@ -8,7 +9,7 @@ const MySurveysContainer = ({ data }: MySurveysContainerProps) => {
   const { data: surveys } = data;
   return (
     <div className="overflow-x-auto container w-full mx-auto bg-base-300">
-      <Table className="w-full">
+      <Table className="w-full text-center">
         <Table.Head>
           <span>#</span>
           <span>Name</span>
@@ -16,15 +17,14 @@ const MySurveysContainer = ({ data }: MySurveysContainerProps) => {
           <span>Action</span>
         </Table.Head>
         <Table.Body>
-          {surveys.map((survey, index) => (
+          {surveys.map((survey) => (
             <Table.Row key={survey.id}>
-              <span>{index}</span>
+              <span>{survey.id}</span>
               <span>{survey.name}</span>
               <span>{new Date(survey.createdAt).toLocaleString()}</span>
-              <span>
-                <button className="btn btn-primary">Edit</button>
-                <button className="btn btn-primary">Delete</button>
-              </span>
+              <div className="flex gap-2 w-full justify-center">
+                <SurveyActions survey={survey} />
+              </div>
             </Table.Row>
           ))}
         </Table.Body>

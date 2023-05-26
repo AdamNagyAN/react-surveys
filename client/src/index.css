@@ -12,3 +12,12 @@
 .icon-sm {
     @apply w-5 h-5
 }
+
+
+.btn-circle svg {
+    @apply w-5 h-5
+}
+
+.btn-circle.loading svg {
+    @apply hidden
+}
