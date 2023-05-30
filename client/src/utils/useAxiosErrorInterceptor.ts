@@ -10,7 +10,6 @@ const useAxiosErrorInterceptor = (): void => {
   const toastBar = useToastBar();
   const interceptor = React.useCallback(
     async (error: any) => {
-      console.log(error);
       if (!error?.response?.status) {
         toastBar({
           title: 'General Error',
@@ -19,7 +18,6 @@ const useAxiosErrorInterceptor = (): void => {
         });
         return await Promise.reject(error);
       }
-      console.log('lefut');
       if (error.response?.status === 401) {
         navigate(ROUTES.LOGIN);
       }

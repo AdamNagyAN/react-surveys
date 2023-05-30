@@ -2,7 +2,7 @@ import { AxiosPromise } from 'axios';
 import axiosBase from '../axiosBase';
 import GetSurveysResponseDto from './dto/GetSurveysResponseDto';
 import SurveyDto from './dto/SurveyDto';
-import CreateSurveyDto from '../auth/dto/CreateSurveyDto';
+import CreateSurveyDto from './dto/CreateSurveyDto';
 
 const getAllWithLimits = (
   skip: number,

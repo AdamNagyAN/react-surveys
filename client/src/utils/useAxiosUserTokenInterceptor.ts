@@ -32,7 +32,6 @@ const useAxiosUserTokenInterceptor = (): boolean => {
   React.useEffect(() => {
     const addedInterceptor = axiosBase.interceptors.request.use(interceptor);
     setIsAdded(true);
-    console.log('added interceptor');
     return () => {
       axiosBase.interceptors.request.eject(addedInterceptor);
     };

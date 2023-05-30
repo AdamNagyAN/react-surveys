@@ -4,7 +4,7 @@ export const ROUTES = {
   REGISTER: '/register',
   CREATE_SURVEY: '/create-survey',
   MODIFY_SURVEY: (id: number | ':id') => `/modify-survey/${id}`,
-  SURVEY: (id: string | ':id') => `/modify-survey/${id}`,
+  SURVEY: (hash: string | ':hash') => `/survey/${hash}`,
   MY_SURVEYS: '/my-surveys',
   ANSWERS: '/answers',
 };

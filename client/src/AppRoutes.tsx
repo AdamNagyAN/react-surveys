@@ -5,6 +5,8 @@ import RegisterPage from './pages/register/RegisterPage';
 import LoginPage from './pages/login/LoginPage';
 import ProtectedRoute from './components/molecules/ProtectedRoute';
 import MySurveysPage from './pages/my-surveys/MySurveysPage';
+import EditSurveyPage from './pages/edit-survey/EditSurveyPage';
+import SurveyPage from './pages/survey/SurveyPage';
 
 const AppRoutes = () => {
   return (
@@ -20,6 +22,15 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+        path={ROUTES.CREATE_SURVEY}
+        element={
+          <ProtectedRoute>
+            <EditSurveyPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route path={ROUTES.SURVEY(':hash')} element={<SurveyPage />} />
       <Route
         path={ROUTES.ANSWERS}
         element={

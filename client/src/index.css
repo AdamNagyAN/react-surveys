@@ -21,3 +21,7 @@
 .btn-circle.loading svg {
     @apply hidden
 }
+
+h2 {
+    @apply text-2xl font-bold mb-4
+}

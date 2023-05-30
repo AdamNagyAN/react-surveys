@@ -17,7 +17,6 @@ const initialValue = {
 };
 
 export const ToastBarContext = createContext<{
-  // eslint-disable-next-line no-unused-vars
   setToastBar: (state: GlobalToastBarProps) => void;
 }>(initialValue);
 
@@ -59,7 +58,6 @@ export const ToastBarProvider = ({ children }: ToastBarProviderProps) => {
   );
 };
 
-// eslint-disable-next-line no-unused-vars
 export const useToastBar = (): ((state: GlobalToastBarProps) => void) => {
   return useContext(ToastBarContext).setToastBar;
 };

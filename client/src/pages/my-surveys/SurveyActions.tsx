@@ -15,16 +15,14 @@ interface SurveyActionsProps {
   survey: SurveyDto;
 }
 const SurveyActions = ({ survey }: SurveyActionsProps) => {
-  const { id } = survey;
+  const { id, hash } = survey;
   const toastBar = useToastBar();
   const { mutateAsync: deleteSurvey, isLoading: isDeleteLoading } =
     useDeleteSurvey();
   const surveyUrl = new URL(
-    ROUTES.MODIFY_SURVEY(id),
+    ROUTES.SURVEY(hash),
     window.location.origin
   ).toString();
-
-  console.log({ surveyUrl });
 
   const onCopy = () => {
     toastBar({
