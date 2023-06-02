@@ -5,6 +5,7 @@ import { ROUTES } from '../../../Routes';
 import { useDispatch, useSelector } from 'react-redux';
 import store from '../../../redux/store';
 import { UserIcon } from '@heroicons/react/24/outline';
+import useGetAllSurveys from '../../../query/surveys/useGetAllSurveys';
 
 type MenuOption =
   | { label: string; path: string }
@@ -43,6 +44,7 @@ const isButton = (
 };
 
 const AppBar = () => {
+  const { data } = useGetAllSurveys(0, 0);
   const { user } = useSelector(
     (state: ReturnType<typeof store.getState>) => state.auth
   );
@@ -94,8 +96,7 @@ const AppBar = () => {
                           </p>
                         </div>
                       </Card.Title>
-                      {/* TODO: amount of surveys */}
-                      <p>Amount of surveys: {0}</p>
+                      <p>Amount of surveys: {data?.total ?? 0}</p>
                       <Button className="mt-4" color="error" onClick={onLogout}>
                         Log out
                       </Button>

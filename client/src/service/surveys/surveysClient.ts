@@ -5,8 +5,8 @@ import SurveyDto from './dto/SurveyDto';
 import CreateSurveyDto from './dto/CreateSurveyDto';
 
 const getAllWithLimits = (
-  skip: number,
-  limit: number
+  skip?: number,
+  limit?: number
 ): AxiosPromise<GetSurveysResponseDto> => {
   return axiosBase.get(`/surveys`, {
     params: { $skip: skip, $limit: limit },
@@ -14,7 +14,9 @@ const getAllWithLimits = (
 };
 
 const getByHash = (hash: string): AxiosPromise<GetSurveysResponseDto> => {
-  return axiosBase.get(`/surveys?hash${hash}`);
+  return axiosBase.get(`/surveys`, {
+    params: { hash },
+  });
 };
 
 const getOne = (id: number): AxiosPromise<SurveyDto> => {
