@@ -1,14 +1,21 @@
-import { Table } from 'react-daisyui';
+import { Button, Pagination, Table } from 'react-daisyui';
 import GetSurveysResponseDto from '../../service/surveys/dto/GetSurveysResponseDto';
 import SurveyActions from './SurveyActions';
+import { PAGE_SIZE } from './MySurveysPage';
 
 interface MySurveysContainerProps {
   data: GetSurveysResponseDto;
+  page: number;
+  setPage: (page: number) => void;
 }
-const MySurveysContainer = ({ data }: MySurveysContainerProps) => {
+const MySurveysContainer = ({
+  data,
+  page,
+  setPage,
+}: MySurveysContainerProps) => {
   const { data: surveys } = data;
   return (
-    <div className="overflow-x-auto container w-full mx-auto bg-base-300">
+    <div className="overflow-x-auto container w-full mx-auto flex flex-col">
       <Table className="w-full text-center">
         <Table.Head>
           <span>#</span>
@@ -29,6 +36,23 @@ const MySurveysContainer = ({ data }: MySurveysContainerProps) => {
           ))}
         </Table.Body>
       </Table>
+      <div className="mx-auto">
+        <Pagination>
+          {Array.from(Array(Math.ceil(data.total / PAGE_SIZE)).keys()).map(
+            (value) => (
+              <Button
+                key={value}
+                active={page === value}
+                onClick={() => {
+                  setPage(value);
+                }}
+              >
+                {value + 1}
+              </Button>
+            )
+          )}
+        </Pagination>
+      </div>
     </div>
   );
 };

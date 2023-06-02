@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import AppBar from '../../components/organisms/appbar/AppBar';
 import useGetAllSurveys from '../../query/surveys/useGetAllSurveys';
 import MySurveysContainer from './MySurveysContainer';
 import LoadingSpinner from '../../components/atoms/LoadingSpinner';
 
+export const PAGE_SIZE = 5;
+
 const MySurveysPage = () => {
-  const { data, isLoading } = useGetAllSurveys(0, 10);
+  const [page, setPage] = useState(0);
+  const { data, isLoading } = useGetAllSurveys(page * PAGE_SIZE, PAGE_SIZE);
 
   return (
     <>
@@ -12,7 +16,7 @@ const MySurveysPage = () => {
       {isLoading || !data ? (
         <LoadingSpinner />
       ) : (
-        <MySurveysContainer data={data} />
+        <MySurveysContainer data={data} page={page} setPage={setPage} />
       )}
     </>
   );
