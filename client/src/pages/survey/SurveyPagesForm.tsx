@@ -52,6 +52,11 @@ const SurveyPagesForm = ({
     if (hasNextPage) {
       setSelectedPageIndex((prev) => prev + 1);
     }
+    if (hasFinish) {
+      console.log(
+        surveyFormValues.map((page) => page.questions.join('\n')).join('\n\n')
+      );
+    }
     // TODO: Save results
   };
 
