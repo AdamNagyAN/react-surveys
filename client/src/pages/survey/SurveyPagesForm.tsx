@@ -5,8 +5,14 @@ import SurveyPageType from './types/SurveyPageType';
 import { surveyFormSchema, SurveyFormValues } from './SurveyForm.schema';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import useCreateResult from '../../query/results/useCreateResult';
+import SurveyDto from '../../service/surveys/dto/SurveyDto';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../Routes';
+import { useToastBar } from '../../components/molecules/toast/ToastBarProvider';
 
 interface SurveyPagesFormProps {
+  survey: SurveyDto;
   surveyPages: SurveyPageType[];
   selectedPageIndex: number;
   setSelectedPageIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -15,12 +21,17 @@ interface SurveyPagesFormProps {
 }
 
 const SurveyPagesForm = ({
+  survey,
   surveyPages,
   setSelectedPageIndex,
   selectedPageIndex,
   surveyFormValues,
   setSurveyFormValues,
 }: SurveyPagesFormProps) => {
+  const navigate = useNavigate();
+  const toastBar = useToastBar();
+  const { mutateAsync: createResult, isLoading: isCreateResultLoading } =
+    useCreateResult();
   const selectedPage = surveyPages[selectedPageIndex];
   const formMethods = useForm<SurveyFormValues>({
     resolver: yupResolver(surveyFormSchema()),
@@ -38,7 +49,7 @@ const SurveyPagesForm = ({
     setSelectedPageIndex((prev) => prev - 1);
   };
 
-  const onSubmit = (formData: SurveyFormValues) => {
+  const onSubmit = async (formData: SurveyFormValues) => {
     const pageResult: SurveyPageType = {
       ...selectedPage,
       questions: formData.questions,
@@ -56,8 +67,19 @@ const SurveyPagesForm = ({
       console.log(
         surveyFormValues.map((page) => page.questions.join('\n')).join('\n\n')
       );
+      await createResult({
+        surveyId: survey.id,
+        content: surveyFormValues
+          .map((page) => page.questions.join('\n'))
+          .join('\n\n'),
+      });
+      navigate(ROUTES.HOME);
+      toastBar({
+        type: 'success',
+        message: 'Survey completed successfully!',
+        title: 'Success',
+      });
     }
-    // TODO: Save results
   };
 
   return (
@@ -74,7 +96,11 @@ const SurveyPagesForm = ({
               <div />
             )}
             {hasNextPage && <Button type="submit">Next</Button>}
-            {hasFinish && <Button type="submit">Finish</Button>}
+            {hasFinish && (
+              <Button type="submit" loading={isCreateResultLoading}>
+                Finish
+              </Button>
+            )}
           </div>
         </form>
       </FormProvider>

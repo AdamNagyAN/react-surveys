@@ -15,7 +15,7 @@ const MySurveysContainer = ({
 }: MySurveysContainerProps) => {
   const { data: surveys } = data;
   return (
-    <div className="overflow-x-auto container w-full mx-auto flex flex-col">
+    <div className="container w-full mx-auto flex flex-col">
       <Table className="w-full text-center">
         <Table.Head>
           <span>#</span>

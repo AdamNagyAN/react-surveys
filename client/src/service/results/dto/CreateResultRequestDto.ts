@@ -1,6 +1,6 @@
 interface CreateResultRequestDto {
   content: string;
-  suveryId: number;
+  surveyId: number;
 }
 
 export default CreateResultRequestDto;

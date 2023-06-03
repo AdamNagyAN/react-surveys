@@ -46,6 +46,7 @@ const SurveyContainer = ({ survey }: SurveyContainerProps) => {
         })}
       </Steps>
       <SurveyPagesForm
+        survey={survey}
         key={selectedPageIndex}
         surveyPages={surveyPages}
         selectedPageIndex={selectedPageIndex}
