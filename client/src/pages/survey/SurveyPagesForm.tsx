@@ -30,7 +30,6 @@ const SurveyPagesForm = ({
       questions: surveyFormValues[selectedPageIndex].questions,
     },
   });
-  console.log(surveyFormValues[selectedPageIndex]);
   const hasPreviousPage = selectedPageIndex > 0;
   const hasNextPage = selectedPageIndex < surveyPages.length - 1;
   const hasFinish = selectedPageIndex === surveyPages.length - 1;

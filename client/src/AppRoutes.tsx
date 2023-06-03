@@ -30,6 +30,14 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+        path={ROUTES.MODIFY_SURVEY(':id')}
+        element={
+          <ProtectedRoute>
+            <EditSurveyPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path={ROUTES.SURVEY(':hash')} element={<SurveyPage />} />
       <Route
         path={ROUTES.ANSWERS}

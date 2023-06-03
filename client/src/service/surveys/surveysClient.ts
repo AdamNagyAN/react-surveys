@@ -29,7 +29,7 @@ const create = (request: CreateSurveyDto): AxiosPromise<SurveyDto> => {
 
 const modify = (
   id: number,
-  request: Partial<CreateSurveyDto>
+  request: CreateSurveyDto
 ): AxiosPromise<SurveyDto> => {
   return axiosBase.patch(`/surveys/${id}`, request);
 };

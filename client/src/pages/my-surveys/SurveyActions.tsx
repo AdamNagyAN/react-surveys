@@ -10,6 +10,7 @@ import useDeleteSurvey from '../../query/surveys/useDeleteSurvey';
 import SurveyDto from '../../service/surveys/dto/SurveyDto';
 import { ROUTES } from '../../Routes';
 import { useToastBar } from '../../components/molecules/toast/ToastBarProvider';
+import { Link } from 'react-router-dom';
 
 interface SurveyActionsProps {
   survey: SurveyDto;
@@ -49,9 +50,12 @@ const SurveyActions = ({ survey }: SurveyActionsProps) => {
           <ClipboardIcon />
         </Button>
       </CopyToClipboard>
-      <Button shape="circle" color="info">
+      <Link
+        className="btn btn-circle btn-info"
+        to={ROUTES.MODIFY_SURVEY(survey.id)}
+      >
         <PencilIcon />
-      </Button>
+      </Link>
       <Button
         onClick={onDelete}
         loading={isDeleteLoading}
