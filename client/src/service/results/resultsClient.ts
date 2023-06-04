@@ -1,12 +1,14 @@
 import axiosBase from '../axiosBase';
 import { AxiosPromise } from 'axios';
 import { SurveyResultDto } from './dto/SurveyResultDto';
-import GetAllSurveysResponseDto from './dto/GetAllSurveysResponseDto';
 import CreateResultRequestDto from './dto/CreateResultRequestDto';
 import ModifyResultRequestDto from './dto/ModifyResultRequestDto';
+import GetAllSurveyResultsResponseDto from './dto/GetAllSurveysResponseDto';
 
-const getAll = (resultId: number): AxiosPromise<GetAllSurveysResponseDto> => {
-  return axiosBase.get('/results', { params: { resultId } });
+const getAll = (
+  surveyId: number
+): AxiosPromise<GetAllSurveyResultsResponseDto> => {
+  return axiosBase.get('/results', { params: { surveyId } });
 };
 
 const getOne = (id: number): AxiosPromise<SurveyResultDto> => {

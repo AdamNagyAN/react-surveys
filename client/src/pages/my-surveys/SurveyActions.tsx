@@ -38,13 +38,11 @@ const SurveyActions = ({ survey }: SurveyActionsProps) => {
     });
   };
 
-  // TODO: more actions
-
   return (
     <>
-      <Button shape="circle">
+      <Link to={ROUTES.ANSWERS(survey.id)} className="btn btn-circle">
         <ChatBubbleBottomCenterTextIcon />
-      </Button>
+      </Link>
       <CopyToClipboard text={surveyUrl} onCopy={onCopy}>
         <Button shape="circle">
           <ClipboardIcon />

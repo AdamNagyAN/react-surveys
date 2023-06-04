@@ -6,5 +6,5 @@ export const ROUTES = {
   MODIFY_SURVEY: (id: number | ':id') => `/modify-survey/${id}`,
   SURVEY: (hash: string | ':hash') => `/survey/${hash}`,
   MY_SURVEYS: '/my-surveys',
-  ANSWERS: '/answers',
+  ANSWERS: (surveyId: number | ':surveyId') => `/answers/${surveyId}`,
 };

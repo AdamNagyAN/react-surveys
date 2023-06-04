@@ -1,10 +1,10 @@
 import { SurveyResultDto } from './SurveyResultDto';
 
-interface GetAllSurveysResponseDto {
+interface GetAllSurveyResultsResponseDto {
   total: number;
   limit: number;
   skip: number;
   data: SurveyResultDto[];
 }
 
-export default GetAllSurveysResponseDto;
+export default GetAllSurveyResultsResponseDto;

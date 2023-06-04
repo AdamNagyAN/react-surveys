@@ -7,6 +7,7 @@ import ProtectedRoute from './components/molecules/ProtectedRoute';
 import MySurveysPage from './pages/my-surveys/MySurveysPage';
 import EditSurveyPage from './pages/edit-survey/EditSurveyPage';
 import SurveyPage from './pages/survey/SurveyPage';
+import ResultPage from './pages/result/ResultPage';
 
 const AppRoutes = () => {
   return (
@@ -40,10 +41,10 @@ const AppRoutes = () => {
       />
       <Route path={ROUTES.SURVEY(':hash')} element={<SurveyPage />} />
       <Route
-        path={ROUTES.ANSWERS}
+        path={ROUTES.ANSWERS(':surveyId')}
         element={
           <ProtectedRoute>
-            <div>Answers</div>
+            <ResultPage />
           </ProtectedRoute>
         }
       />

@@ -20,10 +20,6 @@ const menuOptionsLogged: MenuOption[] = [
     label: 'My surveys',
     path: ROUTES.MY_SURVEYS,
   },
-  {
-    label: 'Answers',
-    path: ROUTES.ANSWERS,
-  },
 ];
 
 const menuOptionsNotLogged: MenuOption[] = [
