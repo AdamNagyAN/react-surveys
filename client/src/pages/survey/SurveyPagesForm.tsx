@@ -54,22 +54,20 @@ const SurveyPagesForm = ({
       ...selectedPage,
       questions: formData.questions,
     };
-    setSurveyFormValues([
+    const newSurveyFormValue: SurveyPageType[] = [
       ...surveyFormValues.map((page) => {
         if (page.id === selectedPageIndex) return pageResult;
         return page;
       }),
-    ]);
+    ];
+    setSurveyFormValues(newSurveyFormValue);
     if (hasNextPage) {
       setSelectedPageIndex((prev) => prev + 1);
     }
     if (hasFinish) {
-      console.log(
-        surveyFormValues.map((page) => page.questions.join('\n')).join('\n\n')
-      );
       await createResult({
         surveyId: survey.id,
-        content: surveyFormValues
+        content: newSurveyFormValue
           .map((page) => page.questions.join('\n'))
           .join('\n\n'),
       });

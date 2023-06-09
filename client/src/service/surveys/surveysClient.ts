@@ -3,13 +3,19 @@ import axiosBase from '../axiosBase';
 import GetSurveysResponseDto from './dto/GetSurveysResponseDto';
 import SurveyDto from './dto/SurveyDto';
 import CreateSurveyDto from './dto/CreateSurveyDto';
+import HEADERS from '../Headers';
 
 const getAllWithLimits = (
+  userId?: number,
+  accessToken?: string,
   skip?: number,
   limit?: number
 ): AxiosPromise<GetSurveysResponseDto> => {
   return axiosBase.get(`/surveys`, {
-    params: { $skip: skip, $limit: limit },
+    params: { $skip: skip, $limit: limit, userId },
+    headers: {
+      [HEADERS.AUTHORIZATION]: accessToken ? `Bearer ${accessToken}` : null,
+    },
   });
 };
 

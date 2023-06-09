@@ -14,13 +14,18 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<LoginResponseDto>) => {
-      userLocalStorage.setUser(action.payload);
-      state.user = action.payload;
+    setUser: (_state, action: PayloadAction<LoginResponseDto>) => {
+      return {
+        user: {
+          ...action.payload,
+        },
+      };
     },
-    logout: (state) => {
+    logout: (_state) => {
       userLocalStorage.removeUser();
-      state.user = undefined;
+      return {
+        user: undefined,
+      };
     },
   },
 });

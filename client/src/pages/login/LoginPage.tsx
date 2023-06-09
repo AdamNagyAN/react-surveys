@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../Routes';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/auth/authSlice';
+import userLocalStorage from '../../utils/userLocalStorage';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const onSubmit = async (formValues: LoginValues) => {
     const resp = await mutateAsync(formValues);
+    userLocalStorage.setUser(resp.data);
     dispatch(setUser(resp.data));
     navigate(ROUTES.HOME);
   };

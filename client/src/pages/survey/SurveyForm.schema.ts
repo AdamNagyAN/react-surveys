@@ -6,6 +6,9 @@ export interface SurveyFormValues {
 
 export const surveyFormSchema = (): yup.ObjectSchema<SurveyFormValues> => {
   return yup.object({
-    questions: yup.array().of(yup.string().required()).required(),
+    questions: yup
+      .array()
+      .of(yup.string().required('This field is required!'))
+      .required(),
   });
 };
